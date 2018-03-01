@@ -6,25 +6,24 @@
 
 dirs =\
 [
-	#"/bin",
-	#"/usr/bin",
-	#"/usr/lib",
+	"/bin",
+	"/usr/bin",
+	"/usr/lib",
 	"./unittest/32",
 	"./unittest/64",
 	"./unittest/ar"
-#	"correc"
 ];
 
 args =\
 {
 	'nm':
 	(
-		['-U', '-t', 'd'],		# User program arguments
-		['-U', '-t', 'd']		# System program arguments
+		['-U', '-t', 'd'],		# User 'nm' arguments
+		['-U', '-t', 'd']		# System 'nm' arguments
 	),
 	'otool':
 	(
-		['-d'],					# User program arguments
-		['-t', '-d']			# System program arguments
+		['-d'],					# User 'otool' arguments
+		['-t', '-d']			# System 'otool' arguments
 	)
 };
