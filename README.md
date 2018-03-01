@@ -25,3 +25,4 @@ Please comment the padding in your source code or use the option* `--remove-spac
 *With this option the checker log is less readable.*
 
     $> python nm-otool-checker/checker.py --remove-space
+![checker result](https://image.ibb.co/ha7ytH/Capture_d_e_cran_2018_03_01_a_18_26_54.png "checker result")
