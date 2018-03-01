@@ -1,0 +1,3 @@
+##### Requirements without version specifiers #####
+tqdm
+PTable
