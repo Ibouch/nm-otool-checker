@@ -8,10 +8,10 @@ dirs =\
 [
 	"/bin",
 	"/usr/bin",
-	"/usr/lib",
-	"./unittest/32",
-	"./unittest/64",
-	"./unittest/ar"
+	"/usr/lib"
+#	"./unittest/32",
+#	"./unittest/64",
+#	"./unittest/ar"
 ];
 
 args =\
