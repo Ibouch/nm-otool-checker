@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding: utf-8
 # Author : Ilyes Bouchlaghem
 
@@ -67,23 +66,22 @@ def async_exec(bin, args, path):
 	os.close(pipe_w)
 	return (clean_data(buffer));
 
-def exec_tests(Ptable, data, args, path_maxlen):
+def exec_tests(Ptable, data, args):
 	index = 0;
 	data_log = str();
 	result = dict();
-
 	while (index < len(data)):
 		for directory in data[index]:
 			for prog in tqdm(args, desc=directory):
 				correct = 0;
 				for path in tqdm(data[index][directory], desc='[ ' + prog.title() + ' ]'):
-
+					# Running user and system programs
 					nm_sys_output = async_exec(prog, args[prog][1], path);
 					nm_usr_output = async_exec("./ft_" + prog, args[prog][0], path);
-
+					# Make diff
 					diff_sys = diff(nm_sys_output, nm_usr_output);
 					diff_usr = diff(nm_usr_output, nm_sys_output);
-
+					# Write result
 					str_log = "[ " + prog.upper() + " ]\t" + path + '\n';
 					if (not diff_sys and not diff_usr):
 						correct += 1;
@@ -92,7 +90,6 @@ def exec_tests(Ptable, data, args, path_maxlen):
 						data_log += "[ Error ] " + str_log;
 					data_log += get_diff_to_string(diff_sys, '<');
 					data_log += get_diff_to_string(diff_usr, '>');
-
 				result[prog] = correct;
 			nb_e = len(data[index][directory])
 			Ptable.add_row([directory, result['nm'], result['otool'], nb_e - result['nm'], nb_e - result['otool'],
@@ -106,15 +103,12 @@ def	main():
 	data = list();
 	for directory in dirs:
 		files = list();
-		path_maxlen = 0;
 		for filename in os.listdir(directory):
 			path = directory + '/' + filename;
 			if os.path.isfile(path) and os.access(path, os.X_OK):
-				path_len = len(path);
-				path_maxlen = (path_len if path_len > path_maxlen else path_maxlen);
 				files.append(path);
 		data.append({directory : files});
-	exec_tests(Ptable, data, args, path_maxlen);
+	exec_tests(Ptable, data, args);
 	Ptable.align = 'r';
 	Ptable.align["PATH"] = "c"
 	print '\n\033[1;33m'
